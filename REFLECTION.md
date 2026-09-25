@@ -2,12 +2,16 @@
    Name exactly what each one frees, and name the two new calls back in the program responsible
    for putting them on the heap in the first place.
 
+In `main.cpp`, the method call uses `new int(value)`, which creates a new integer object. This then is 
+passed to `LinkedList::addFront()` and inside of that method, a new node object is created 
+(`new Node<T>(value)`). Now there are two objects in memory that both need to be freed. 
+`delete doomed->data` frees the integer object inside the node and `delete doomed` frees the Node object.
 
 2. ArrayList never had a destructor before today. Explain, in your own words, why switching
    from T data[CAPACITY] to T* data [CAPACITY] is what made a destructor necessary, and what
    would happen if you forgot to write one. Would you get a compiler error? Why or why not?
 
-Switching from T data[CAPACITY] to T* data [CAPACITY] makes a destructor necessary because
+Switching from `T data[CAPACITY]` to `T* data [CAPACITY]` makes a destructor necessary because
 when you create an arraylist out of pointers, the objects sit somewhere in memory and 
 pointers do not have their own destructors. By not writing a destructor in a pointer arraylist, 
 you would fill your memory with inaccessible objects. In a standard arraylist,
