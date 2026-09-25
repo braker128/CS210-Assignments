@@ -24,6 +24,10 @@ and object in memory should be connected or not, it's a logic error and memory l
    Explain the difference in terms of ownership: which one is allowed to delete what you hand it,
    and which one is never allowed to?
 
+The difference in terms of ownership between them is that `addFront` has ownership over the pointer 
+because the value that it's passed gets stored into a list or node that persists after the method call. 
+`search()` never has ownership because it doesn't store any values outside of the call and only 
+compares values against the search value.
 
 4. You swapped LinkedList<T> for ArrayList<T> inside makeList() and reran main.cpp without
    changing a single line there. What two mechanisms, by name, made that possible?
