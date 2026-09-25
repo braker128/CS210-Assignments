@@ -42,3 +42,7 @@ are `virtual', rather than the compiler deciding on which to call.
    thought to add on your own (explicit, override, virtual, const, or any other). Describe, in
    your own words and without copying the guide’s wording, the smallest example you can think
    of where leaving it out would cause a real problem.
+
+By leaving out `virtual`, `List<T>`'s methods would be resolved at compile time based on `list`'s 
+type, not a real object (all of List's methods are `= 0`), so `list->addFront(value)` would not be 
+able to reach any ArrayList or LinkedList code.
