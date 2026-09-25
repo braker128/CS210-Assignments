@@ -32,8 +32,13 @@ compares values against the search value.
 4. You swapped LinkedList<T> for ArrayList<T> inside makeList() and reran main.cpp without
    changing a single line there. What two mechanisms, by name, made that possible?
 
+The two mechanisms that made that possible are abstraction and polymorphism. Abstraction allows 
+`main.cpp` to use the interface `List<T>` which abstracts which class is used (`ArrayList` vs 
+`LinkedList`) rather than requiring you to make or know that choice in `main.cpp`. Polymorphism
+allows `list->addFront(value)` to call the correct method at runtime because `List<T>`'s methods 
+are `virtual', rather than the compiler deciding on which to call.
 
-5. Pick one keyword from the Key Terms glossary that you either had to add today or wouldn’t h ave
+5. Pick one keyword from the Key Terms glossary that you either had to add today or wouldn’t have
    thought to add on your own (explicit, override, virtual, const, or any other). Describe, in
    your own words and without copying the guide’s wording, the smallest example you can think
    of where leaving it out would cause a real problem.
