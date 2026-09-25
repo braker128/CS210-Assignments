@@ -42,4 +42,3 @@ are `virtual', rather than the compiler deciding on which to call.
    thought to add on your own (explicit, override, virtual, const, or any other). Describe, in
    your own words and without copying the guide’s wording, the smallest example you can think
    of where leaving it out would cause a real problem.
-
