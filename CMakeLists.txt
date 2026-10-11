@@ -11,4 +11,8 @@ add_executable(CS210_Assignments
         "Assignment 3/LinkedList.h"
         "Assignment 3/main.cpp"
         "Assignment 3/Node.h"
-        "Assignment 3/List.h")
+        "Assignment 3/List.h"
+
+        "PA1 Uno Turn Order/main.cpp"
+        "PA1 Uno Turn Order/Player.h"
+        "PA1 Uno Turn Order/Stack.h")
