@@ -57,8 +57,8 @@ public:
 
     /* TODO:
         - addAnywhere()
-        deleteAnywhere()
-        reverse()
+        - deleteAnywhere()
+        - reverse()
         concat()
     */
 
@@ -112,8 +112,15 @@ public:
     }
 
     void reverse() override {
-
+        // Bounds 0 -> size_ - 1
+        T* temp = nullptr;
+        for (int i = 0, j = size_ - 1; i < j; i++, j--) {
+            temp = data_[j];
+            data_[j] = data_[i];
+            data_[i] = temp;
+        }
     }
+
 
     void concat(List<T>* other) override {
 
