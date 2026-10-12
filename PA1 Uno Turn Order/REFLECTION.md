@@ -48,3 +48,6 @@ replace the position pointer too.
 
 6. Point to the exact line in your main.cpp where a Reverse card actually changes the direction of
    play, and explain what would visibly break in the game if that call were missing.
+
+table->reverse() on line 47 of main.cpp. If that call were missing, the order would stay
+the same instead of reversing play and would also remove Chloe instead of Steve later on.
