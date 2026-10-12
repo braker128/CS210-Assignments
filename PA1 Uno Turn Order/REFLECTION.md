@@ -32,7 +32,10 @@ implementation prints an error message and leaves the list unchanged.
    LinkedList still tracked a tail pointer, and what would you have to keep updated elsewhere
    if you added one back?
 
-
+I needed to walk to the end of the list first because to append nodes onto the list, I have 
+to be at the end or else I would overwrite other nodes; addFront and deleteFront only managed
+the front, which are O(1) in a LinkedList. concat's performance would become O(1) if it tracked
+a tail pointer, but would have to update the pointer throughout nearly all of the methods.
 
 5. Pick either addAnywhere or deleteAnywhere in ArrayList and explain, in your own words, what
    has to shift and in which direction, and why shifting in the wrong direction would overwrite
