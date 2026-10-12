@@ -5,12 +5,19 @@ code where a question asks you to.
    you have to do differently, or what would go wrong, if you tried to make it work between a
    LinkedList and an ArrayList?
 
-
+Concat only needs to work between two lists of the same representation because they store and connect
+their elements differently. To make that work, you would need to convert the storage structures, 
+allocate nodes to hold the array's pointers, transfer data pointers to open array indexes, and do 
+this while cleaning up memory/pointers without deleting stored objects.
 
 2. Walk through reverse() on your linked list: name the three pointers you need alive at once,
    and explain why losing track of any one of them mid-loop corrupts the list.
 
-
+The three pointers I need alive at once are previous, current, and temp. Previous tracks the 
+reversed part, current tracks the node that I'm changing the pointer of, and temp stores the
+original next node before I overwrite current->next. Losing track of previous would lose access to the 
+reversed part, losing track of current would process an incorrect node, and losing track of temp 
+would lose access to the remaining list.
 
 3. addAnywhere and deleteAnywhere both need a bounds check. What’s the valid range for
    position in each, and what does your implementation do if a caller passes a position outside
