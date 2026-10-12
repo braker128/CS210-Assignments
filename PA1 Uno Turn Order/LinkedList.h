@@ -58,7 +58,7 @@ public:
     /* TODO:
         - addAnywhere()
         - deleteAnywhere()
-        reverse()
+        - reverse()
         concat()
     */
 
@@ -133,7 +133,18 @@ public:
     }
 
     void reverse() override {
+        Node<T>* previous = nullptr;
+        Node<T>* current = head_;
 
+        // Flips pointer direction
+        while (current != nullptr) {
+            Node<T>* temp = current->next;
+            current->next = previous;
+            previous = current;
+            current = temp;
+        }
+
+        head_ = previous;
     }
 
     void concat(List<T>* other) override {
