@@ -86,7 +86,7 @@ public:
         }
 
         // Check if position is valid
-        if (position > size_ || position < 0) {
+        if (position >= size_ || position < 0) {
             std::cout << "Position invalid." << std::endl;
             return;
         }
