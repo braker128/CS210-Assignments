@@ -55,13 +55,6 @@ public:
         }
     }
 
-    /* TODO:
-        - addAnywhere()
-        - deleteAnywhere()
-        - reverse()
-        concat()
-    */
-
     void addAnywhere(int position, T* value) override {
         // Check if array is full
         if (size_ >= CAPACITY) {
@@ -121,9 +114,27 @@ public:
         }
     }
 
-
     void concat(List<T>* other) override {
+        // Check dynamic cast
+        ArrayList<T>* casting = dynamic_cast<ArrayList<T>*>(other);
+        if (casting == nullptr) {
+            cout << "Lists are of different types." << endl;
+            return;
+        }
+        // Check if remaining indexes in array can fit all of other
+        if (CAPACITY - size_ < casting->size_) {
+            cout << "New list has too many elements to fit." << endl;
+            return;
+        }
+        // Move pointers from casting to this
+        for (int i = 0; i < casting->size_; ++i) {
+            data_[size_] = casting->data_[i];
+            casting->data_[i] = nullptr;
+            size_++;
+        }
 
+        // Set casting array size to 0 (empty)
+        casting->size_ = 0;
     }
 
 
