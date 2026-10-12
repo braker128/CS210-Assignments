@@ -55,13 +55,6 @@ public:
         }
     }
 
-    /* TODO:
-        - addAnywhere()
-        - deleteAnywhere()
-        - reverse()
-        concat()
-    */
-
     void addAnywhere(int position, T* value) override {
         int posTracker = 0;
         Node<T>* current = head_;
@@ -148,7 +141,34 @@ public:
     }
 
     void concat(List<T>* other) override {
+        // Check dynamic cast
+        LinkedList<T>* casting = dynamic_cast<LinkedList<T>*>(other);
+        if (casting == nullptr) {
+            cout << "Lists are of different types." << endl;
+            return;
+        }
 
+        // If this list is empty
+        if (head_ == nullptr) {
+            head_ = casting->head_;
+            casting->head_ = nullptr;
+            return;
+        }
+
+        // If casting list is empty
+        if (casting->head_ == nullptr) {
+            return;
+        }
+
+        // Traverse to end of list; current->next == nullptr
+        Node<T>* current = head_;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+
+        // Connect end of list to casting + set casting list to empty
+        current->next = casting->head_;
+        casting->head_ = nullptr;
     }
 
 private:
