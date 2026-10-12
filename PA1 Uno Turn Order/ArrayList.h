@@ -127,7 +127,7 @@ public:
             return;
         }
         // Move pointers from casting to this
-        for (int i = 0; i < casting->size_; ++i) {
+        for (int i = 0; i < casting->size_; i++) {
             data_[size_] = casting->data_[i];
             casting->data_[i] = nullptr;
             size_++;
