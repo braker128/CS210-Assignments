@@ -23,7 +23,9 @@ would lose access to the remaining list.
    position in each, and what does your implementation do if a caller passes a position outside
    it?
 
-
+The valid range for position in addAnywhere is between 0 and n, and the range in deleteAnywhere 
+is between 0 and n - 1. If a caller passes a position outside of those ranges, my
+implementation prints an error message and leaves the list unchanged.
 
 4. In LinkedList::concat, why did you need to walk to the end of the list first, when addFront
    and deleteFront never needed to? What would change about concat’s performance if
