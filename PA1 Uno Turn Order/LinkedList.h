@@ -57,7 +57,7 @@ public:
 
     /* TODO:
         - addAnywhere()
-        deleteAnywhere()
+        - deleteAnywhere()
         reverse()
         concat()
     */
@@ -84,7 +84,7 @@ public:
             posTracker++;
         }
 
-        // If position is outside 0 to size_
+        // If position is outside range 0 to size_
         if (current == nullptr) {
             cout << "Position invalid." << endl;
             return;
@@ -97,6 +97,38 @@ public:
     }
 
     void deleteAnywhere(int position) override {
+        int posTracker = 0;
+        Node<T>* current = head_;
+
+        // zero position
+        if (position == 0) {
+            deleteFront();
+            return;
+        }
+
+        // Check that position is valid
+        if (position < 0) {
+            cout << "Position invalid" << endl;
+            return;
+        }
+
+        // Find delete location
+        while (current != nullptr && posTracker < position - 1) {
+            current = current->next;
+            posTracker++;
+        }
+
+        // Check that current and current->next exist
+        if (current == nullptr || current->next == nullptr) {
+            cout << "Position invalid." << endl;
+            return;
+        }
+
+        // Delete at position
+        Node<T>* doomed = current->next;
+        current->next = doomed->next;
+        delete doomed->data;
+        delete doomed;
 
     }
 
