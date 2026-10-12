@@ -41,9 +41,10 @@ a tail pointer, but would have to update the pointer throughout nearly all of th
    has to shift and in which direction, and why shifting in the wrong direction would overwrite
    data you still need.
 
+In addAnywhere, every pointer from position to size_ - 1 moves one index to the right. Shifting 
+in the wrong direction would overwrite two pointers of data because you move one to the left, then
+replace the position pointer too.
 
 
 6. Point to the exact line in your main.cpp where a Reverse card actually changes the direction of
    play, and explain what would visibly break in the game if that call were missing.
-
-
