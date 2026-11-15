@@ -15,12 +15,25 @@ private:
     // TODO 6: how many scenes are in the story that starts at scene?
     // An empty story has 0 scenes.
     int countScenes(Scene<T>* scene) const {
-        return 0;
+        if (scene == nullptr) {return 0;} // base case
+
+        int sceneCount = 1;
+        for (int i = 0; i < scene->getNumChoices(); i++) {
+            sceneCount += countScenes(scene->getChoice(i));
+        }
+        return sceneCount;
     }
 
     // TODO 7: how many endings are in the story that starts at scene?
     int countEndings(Scene<T>* scene) const {
-        return 0;
+        if (scene == nullptr) {return 0;} // base case
+        if (scene->isEnding()) {return 1;} // base case
+
+        int endingCount = 0;
+        for (int i = 0; i < scene->getNumChoices(); i++) {
+            endingCount += countEndings(scene->getChoice(i));
+        }
+        return endingCount;
     }
 
     // TODO 8: the most choices a player can make on the way to an ending,
