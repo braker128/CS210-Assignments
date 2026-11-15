@@ -240,6 +240,7 @@ void Adventure::printStats() const {
 
 // TODO 15: print every ending in the story, one per line.
 void Adventure::printSpoilers() const {
+    printEndings(tree_.getRoot(),"");
 }
 
 // TODO 16: print every ending below scene.
@@ -249,6 +250,19 @@ void Adventure::printSpoilers() const {
 // If the very first scene is an ending, print "Path (start): <scene text>".
 // Endings print in order: choice 1 before choice 2 before choice 3.
 void Adventure::printEndings(Scene<Moment>* scene, const std::string& path) const {
+    if (scene == nullptr) {return;}
+    if (scene->isEnding()) {
+        if (path == "") {
+            cout << "Path (start): " << scene->getData()->getText() << endl;
+        } else {
+            cout << "Path " << path << ": " << scene->getData()->getText() << endl;
+        }
+        return;
+    }
+    for (int i = 0; i < scene->getNumChoices(); i++) {
+        Scene<Moment>* child = scene->getChoice(i);
+        printEndings(child, extendPath(path, i + 1));
+    }
 }
 
 // TODO 17: the greedy advisor.
