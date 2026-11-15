@@ -174,6 +174,56 @@ int Adventure::askChoice(int numChoices) {
 // and then print the bag.
 // The bag is a List<Item>. Start with HP = startHp_ and loot = 0.
 void Adventure::play() {
+    int hp = startHp_;
+    int loot = 0;
+    List<Item> bag;
+
+    Scene<Moment>* scene = tree_.getRoot();
+
+    while (true) {
+        Moment* moment = scene->getData();
+        // 1
+        hp += moment->getHpChange();
+        loot += moment->getLoot();
+        // 2
+        cout << string(40, '-') << endl;
+        cout << moment->getText() << endl;
+        // 3
+        if (moment->hasItem()) {
+            string item = moment->getItem();
+            if (bag.search(item)) {
+                cout << "You already have: " << item << endl;
+            } else {
+                bag.addFront(new Item(item));
+                cout << "You picked up: " << item << endl;
+            }
+        }
+        // 4
+        cout << "HP: " << hp << "  Loot: " << loot << endl;
+        // 5
+        if (hp <= 0) {
+            cout << "Your HP hit 0. GAME OVER." << endl;
+            break;
+        }
+        if (scene->isEnding()) {
+            cout << "THE END." << endl;
+            break;
+        }
+        // 6
+        for (int i = 0; i < scene->getNumChoices(); i++) {
+            Scene<Moment>* child = scene->getChoice(i);
+            cout << "[" << i + 1 << "] " << child->getData()->getLabel() << endl;
+        }
+        int pick = askChoice(scene->getNumChoices());
+        if (pick == 0) {return;}
+        scene = scene->getChoice(pick - 1);
+    }
+
+
+    // game stops
+    cout << "Final HP: " << hp << "  Final loot: " << loot << endl;
+    cout << "Inventory (" << bag.size() << " items):" << endl;
+    bag.print();
 }
 
 // ===================== ANALYZING =====================
@@ -183,6 +233,9 @@ void Adventure::play() {
 //   Endings: <count>
 //   Longest playthrough: <height> choices
 void Adventure::printStats() const {
+    cout << "Scenes: " << tree_.countScenes() << endl;
+    cout << "Endings: " << tree_.countEndings() << endl;
+    cout << "Longest playthrough: " << tree_.height() << " choices" << endl;
 }
 
 // TODO 15: print every ending in the story, one per line.
