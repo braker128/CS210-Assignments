@@ -1,6 +1,9 @@
 #include "Adventure.h"
 #include <iostream>
 
+
+using namespace std;
+
 // ===================== GIVEN HELPERS (do not change) =====================
 
 // Reads the next line that is not blank.
@@ -63,7 +66,25 @@ std::string Adventure::extendPath(const std::string& path, int choiceNumber) con
 //   - Build the whole story with readScene. The first scene's label is "START".
 //   - If anything failed, return false. Otherwise give the story to tree_.
 bool Adventure::load(const std::string& fileName) {
-    return false;
+    ifstream file(fileName);
+    if (!file.is_open()) {
+        cout << "Error: could not open file " << fileName << endl;
+        return false;
+    }
+
+    string hp;
+    if (!readField(file, "START_HP", hp)) {
+        return false;
+    }
+    startHp_ = stoi(hp);
+
+    Scene<Moment>* root = readScene(file, "START");
+    if (root == nullptr) {
+        return false;
+    }
+    tree_.setRoot(root);
+
+    return true;
 }
 
 // TODO 11: read ONE scene and everything below it. Return it.
@@ -75,7 +96,40 @@ bool Adventure::load(const std::string& fileName) {
 //   - If anything goes wrong at any depth, return nullptr
 //     and make sure nothing you already built is leaked.
 Scene<Moment>* Adventure::readScene(std::ifstream& in, const std::string& label) {
-    return nullptr;
+    string scene, hp, loot, item, choices;
+    if (!readField(in, "SCENE", scene)) {return nullptr;}
+    if (!readField(in, "HP", hp)) {return nullptr;}
+    if (!readField(in, "LOOT", loot)) {return nullptr;}
+    if (!readField(in, "ITEM", item)) {return nullptr;}
+    if (!readField(in, "CHOICES", choices)) {return nullptr;}
+
+    int numChoices = stoi(choices);
+    if (numChoices < 0 || numChoices > Scene<Moment>::MAX_CHOICES) {
+        cout << "Error: scene \"" << scene << "\" has " << numChoices << " choices. The limit is 3." << endl;
+        return nullptr;
+    }
+
+    Moment* moment = new Moment(scene, label, stoi(hp), stoi(loot), item);
+    Scene<Moment>* currentScene = new Scene<Moment>(moment, numChoices);
+
+
+    for (int i = 0; i < numChoices; i++) {
+        string childLabel;
+        if (!readField(in, "LABEL", childLabel)) {
+            delete currentScene;
+            return nullptr;
+        }
+
+        Scene<Moment>* child = readScene(in, childLabel);
+        if (child == nullptr) {
+            delete currentScene;
+            return nullptr;
+        }
+
+        currentScene->setChoice(i, child);
+    }
+
+    return currentScene;
 }
 
 // ===================== PLAYING =====================
