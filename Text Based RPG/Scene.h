@@ -22,12 +22,23 @@ public:
         // A scene with numChoices_ choices needs exactly numChoices_ slots.
         // An ending (0 choices) needs no slots at all.
         // Every slot must start out empty.
+        if (numChoices_ == 0) {
+            return;
+        }
+        choices_ = new Scene<T>*[numChoices_]();
     }
 
     ~Scene() {
         // TODO 2:
         // Free everything this scene owns.
         // Think about what it owns, and what each slot points to.
+        // data_, child scenes, then choices_ scene
+        delete data_;
+        for (int i = 0; i < numChoices_; i++) { // delete pointers stored in choices_[]
+            delete choices_[i];
+        }
+        delete[] choices_; // delete choices_[]
+
     }
 
     T* getData() const {
@@ -40,17 +51,23 @@ public:
 
     // TODO 3: true if this scene is an ending.
     bool isEnding() const {
-        return false;
+        return numChoices_ == 0;
     }
 
     // TODO 4: the scene behind slot index.
     // Return nullptr if index is not a real slot.
     Scene<T>* getChoice(int index) const {
+        if (index < numChoices_ && index >= 0) {
+            return choices_[index];
+        }
         return nullptr;
     }
 
     // TODO 5: put next into slot index.
     // Do nothing if index is not a real slot.
     void setChoice(int index, Scene<T>* next) {
+        if (index < numChoices_ && index >= 0) {
+            choices_[index] = next;
+        }
     }
 };
