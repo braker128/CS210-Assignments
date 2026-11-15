@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include <algorithm>
 
 // The whole story. It knows the first scene and nothing else.
 //
@@ -40,7 +41,15 @@ private:
     // starting at scene. A single ending scene has height 0.
     // An empty story has height -1.
     int height(Scene<T>* scene) const {
-        return -1;
+        if (scene == nullptr) {return -1;}
+        if (scene->isEnding()) {return 0;}
+
+        int maxHeight = 0;
+        for (int i = 0; i < scene->getNumChoices(); i++) {
+            maxHeight = std::max(maxHeight, height(scene->getChoice(i)));
+        }
+
+        return 1 + maxHeight;
     }
 
 public:
@@ -66,6 +75,8 @@ public:
     // TODO 9: free every scene in the story and leave the tree empty.
     // Hint: what does deleting a Scene already do for you?
     void clear() {
+        delete root_;
+        root_ = nullptr;
     }
 
     int countScenes() const {
