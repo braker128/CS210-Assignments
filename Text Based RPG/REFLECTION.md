@@ -71,18 +71,33 @@ scenes. It visits every scene. O(n).
 2. Why does each scene allocate exactly `numChoices` slots instead of declaring `Scene<T>*
    choices[3]`? What does an ending hold in `choices_`, and why?
 
-
+Each scene allocates numChoices slots so that it doesn't waste memory and each loop through
+children only runs the number of times it has choices available. An ending in choices_
+holds a nullptr because it doesn't have any choices and therefore does not need an array.
 
 3. Walk through your `Scene` destructor. What gets deleted, and in what order? What would
    go wrong if `choices_` were deleted first?
 
-
+My scene destructor deletes data_, pointers stored in choices_ (child pointers), and 
+choices_ in that order. If choices_ were deleted first, the child pointers would be lost
+and leaked to memory.
 
 4. Show the path greedy took and the path optimal took on your story, with the loot for each.
    Explain why greedy lost. If greedy did not lose, change your story until it does, and explain
    what you changed.
 
+Greedy advisor
+Path: 2-1-1-1-1
+Loot: 5
+Result: died
 
+Optimal advisor
+Path: 2-1-1-2-2-1-1
+Loot: 10
+Result: reached an ending
+
+The greedy path lost because it chose to go to the forest instead of the village because 
+there was more wood there to grab, which lead to them dying to the wolf. 
 
 5. `bestLoot` tries every path, yet it runs in `O(n)` time. Explain why it is not exponential, using
    what you know about paths and leaves in a tree.
