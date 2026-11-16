@@ -2,7 +2,7 @@
    give its time complexity in terms of n, the number of scenes. One short paragraph each.
 
 `TODO 1`: The scene constructor. If a scene has no choices (an ending), 
-returns nothing and leaves choices_ as it's default value of nullptr. Otherwise,
+returns nothing and leaves choices_ as its default value of nullptr. Otherwise,
 it creates a new array the size of numChoices_. It runs O(1) because it can only allocate
 up to 3 indexes, independent of how large the story gets / number of scenes.
 
@@ -37,7 +37,7 @@ with readScene. O(n) because readScene reads every scene.
 
 `TODO 11`: Reads a scene's fields with error handling, builds the Moment and Scene, 
 reads the label of each choice and recurses to build that branch. The scene is listed
-before its children, so failures delete that build and return nullptr so nothing leaks.
+before its children. Failures delete that build and return nullptr so nothing leaks.
 Every scene is read once. O(n).
 
 `TODO 12`: Prompts the player to pick a choice with error handling. O(1) per attempt.
@@ -62,7 +62,7 @@ loot able to be acquired. Checks at most 3 children (MAX_CHOICES). Up to O(n) wh
 scene has one choice until the ending (0).
 
 `TODO 18`: Recursively finds the most loot you can possibly collect without dying. If
-it reaches and ending or dies, it saves that as the best result and recurses the remaining
+it reaches and ending or dies, it saves that path as the best result and recurses the remaining
 scenes. It visits every scene. O(n).
 
 `TODO 19`: Calls bestLoot and displays the optimal path, loot, and survival result. O(n).
