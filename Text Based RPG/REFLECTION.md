@@ -61,9 +61,9 @@ scene, it picks the choice with the highest amount of loot even if that is not t
 loot able to be acquired. Checks at most 3 children (MAX_CHOICES). Up to O(n) where each 
 scene has one choice until the ending (0).
 
-`TODO 18`: Recursively finds the most loot you can possibly collect without dying. If
-it reaches an ending or dies, it saves that path as the best result and recurses the remaining
-scenes. It visits every scene. O(n).
+`TODO 18`: Recursively finds the most loot you can possibly collect without dying. If it
+dies, it returns -1. When it reaches an ending, it saves its path as the best result and 
+recurses the remaining scenes. It visits every scene. O(n).
 
 `TODO 19`: Calls bestLoot and displays the optimal path, loot, and survival result. O(n).
 
