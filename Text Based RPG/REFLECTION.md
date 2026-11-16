@@ -97,12 +97,12 @@ Loot: 10
 Result: reached an ending
 
 The greedy path lost because it chose to go to the forest instead of the village because 
-there was more wood there to grab, which lead to them dying to the wolf. 
+there was more loot there to grab, which led to them dying to the wolf. 
 
 5. `bestLoot` tries every path, yet it runs in `O(n)` time. Explain why it is not exponential, using
    what you know about paths and leaves in a tree.
 
-Each scene has one parent and the number of ending are the number of leaves, which cannot be
+Each scene has one parent and the number of endings are the number of leaves, which cannot be
 greater than n. A path is from the root to a leaf, but shared paths are not tried separately,
 they branch, making it visit each node only once. It could become exponential if it were a 
 graph rather than a tree.
@@ -112,5 +112,5 @@ graph rather than a tree.
 
 My game uses: search to check if an item is already in the bag before adding it, addFront
 to add an item to the bag, size to display the number of items in the bag, and print to
-list each item in the bag. Search's cost is linear / O(n), but it is called each time an
-item is added, up to O(n^2) over the entire game.
+list each item in the bag. Search's cost is linear / O(n), but it is called each time you
+enter a scene with an item, up to O(n^2) over the entire game.
