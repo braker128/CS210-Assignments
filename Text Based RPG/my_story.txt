@@ -1,6 +1,120 @@
-START_HP 10
-SCENE Replace this file with your own story.
+START_HP 6
+SCENE The Purple Jelly begins their adventure at the top of a large hill.
 HP 0
 LOOT 0
-ITEM none
-CHOICES 0
+ITEM Blade of Grass
+CHOICES 2
+LABEL Go to the sunflower field
+  SCENE You hop to the sunflower field and pick a few for yourself.
+  HP 2
+  LOOT 0
+  ITEM Small Bunch of Sunflowers
+  CHOICES 1
+  LABEL Greet the fluffy rabbit
+    SCENE The rabbit introduces herself as Peanut and seems quite sweet.
+    HP 0
+    LOOT 0
+    ITEM none
+    CHOICES 3
+    LABEL Offer Peanut one of your sunflowers
+      SCENE Peanut accepts the sunflower and offers a gift for your generosity.
+      HP 1
+      LOOT 2
+      ITEM none
+      CHOICES 1
+      LABEL Accept Peanut's gift
+        SCENE Peanut hands you a sparkling star-shaped pink magic wand! You live happily ever after!
+        HP 0
+        LOOT 0
+        ITEM Peanut's Sparkling Magic Wand
+        CHOICES 0
+    LABEL Ignore Peanut and hop away
+      SCENE You leave Peanut without saying a word and hop into the distance.
+      HP 0
+      LOOT 0
+      ITEM none
+      CHOICES 0
+    LABEL Eat a whole sunflower in front of Peanut
+      SCENE You eat a whole sunflower right in front of Peanut!
+      HP -3
+      LOOT 0
+      ITEM none
+      CHOICES 1
+      LABEL Notice Peanut
+        SCENE Peanut is furious at you! She casts a painful spell on you, leaving you unable to move.
+        HP -3
+        LOOT 0
+        ITEM Magic Dust
+        CHOICES 0
+LABEL Roll down the hill
+  SCENE You roll down the hill and tumble a few times before reaching the bottom.
+  HP -2
+  LOOT 1
+  ITEM none
+  CHOICES 1
+  LABEL Hop to a nearby river
+    SCENE While standing by the river, a fish unexpectedly jumps into your bag, splashing you with cold water!
+    HP -1
+    LOOT 2
+    ITEM Fish
+    CHOICES 1
+    LABEL Look for somewhere to build a bonfire to warm up.
+      SCENE You look around and see a forest and a village.
+      HP 0
+      LOOT 0
+      ITEM none
+      CHOICES 2
+      LABEL Go to the forest
+        SCENE You hop into the forest and find some sticks on the ground. The forest is denser and darker than you thought.
+        HP 0
+        LOOT 2
+        ITEM Sticks
+        CHOICES 1
+        LABEL You encounter a wolf!
+          SCENE The wolf attacks you and you die.
+          HP -8
+          LOOT 0
+          ITEM Wolf Tooth
+          CHOICES 0
+      LABEL Go to the village
+        SCENE You begin to dry off a little. You enter the village and see some wood next to a house.
+        HP 1
+        LOOT 0
+        ITEM none
+        CHOICES 2
+        LABEL Steal the wood
+          SCENE You sneak around and steal some wood for your bonfire.
+          HP -1
+          LOOT 4
+          ITEM Logs
+          CHOICES 1
+          LABEL Build the bonfire
+            SCENE You build the bonfire and light it, but trip and fall inside. You die.
+            HP -10
+            LOOT 0
+            ITEM none
+            CHOICES 0
+        LABEL Ask the villager for wood
+          SCENE The villager greets you and graciously offers to let you use some. He notices you're a bit beat up still and heals you with a potion.
+          HP 3
+          LOOT 3
+          ITEM Logs
+          CHOICES 1
+          LABEL Build the bonfire
+            SCENE You and the villager build the bonfire and light it, warming up from the fish's cold splash. The villager offers his guitar.
+            HP 1
+            LOOT 1
+            ITEM Guitar
+            CHOICES 2
+            LABEL Play the guitar
+              SCENE You pick up the guitar and sing a calming campfire song. Other villagers come around and some leave donations, one gives you a lollipop.
+              HP 3
+              LOOT 3
+              ITEM Lollipop
+              CHOICES 0
+            LABEL Ask the villager to play you a song
+              SCENE You relax and fall into a restful slumber.
+              HP 2
+              LOOT 0
+              ITEM none
+              CHOICES 0
