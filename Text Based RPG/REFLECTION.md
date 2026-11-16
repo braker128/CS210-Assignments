@@ -110,3 +110,7 @@ graph rather than a tree.
 6. Which `List` methods does your game use, and why? What does one `search` cost as the bag
    grows?
 
+My game uses: search to check if an item is already in the bag before adding it, addFront
+to add an item to the bag, size to display the number of items in the bag, and print to
+list each item in the bag. Search's cost is linear / O(n), but it is called each time an
+item is added, up to O(n^2) over the entire game.
