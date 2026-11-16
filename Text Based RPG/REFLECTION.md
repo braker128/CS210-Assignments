@@ -102,7 +102,10 @@ there was more wood there to grab, which lead to them dying to the wolf.
 5. `bestLoot` tries every path, yet it runs in `O(n)` time. Explain why it is not exponential, using
    what you know about paths and leaves in a tree.
 
-
+Each scene has one parent and the number of ending are the number of leaves, which cannot be
+greater than n. A path is from the root to a leaf, but shared paths are not tried separately,
+they branch, making it visit each node only once. It could become exponential if it were a 
+graph rather than a tree.
 
 6. Which `List` methods does your game use, and why? What does one `search` cost as the bag
    grows?
